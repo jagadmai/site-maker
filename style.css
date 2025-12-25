@@ -2,91 +2,94 @@
   box-sizing: border-box;
 }
 
+/* PAGE BACKGROUND */
 body {
   margin: 0;
   min-height: 100vh;
   font-family: "Segoe UI", Inter, system-ui, Arial, sans-serif;
 
-  /* Soft modern background */
-  background: linear-gradient(
-    135deg,
-    #f8fafc,
-    #e2e8f0
-  );
+  /* VERY CLEAR BACKGROUND */
+  background:
+    radial-gradient(circle at top left, #c7d2fe, transparent 40%),
+    radial-gradient(circle at bottom right, #fbcfe8, transparent 40%),
+    linear-gradient(135deg, #eef2ff, #fdf2f8);
 
-  color: #0f172a;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 40px;
+  color: #0f172a;
 }
 
-/* Main wrapper */
+/* MAIN CONTAINER */
 .container {
-  background: white;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+
   max-width: 1000px;
   width: 100%;
   padding: 50px 60px;
-  border-radius: 28px;
+  border-radius: 30px;
 
-  /* Glassy depth */
   box-shadow:
-    0 20px 40px rgba(15, 23, 42, 0.08),
-    0 4px 10px rgba(15, 23, 42, 0.04);
+    0 30px 60px rgba(15, 23, 42, 0.15),
+    0 10px 20px rgba(15, 23, 42, 0.08);
 
   text-align: center;
 }
 
-/* Headings */
+/* TITLE */
 h1 {
   font-size: 3rem;
   margin-bottom: 12px;
   letter-spacing: -1px;
 }
 
+/* SUBTITLE */
 p {
   font-size: 1.2rem;
   color: #475569;
   margin-bottom: 50px;
 }
 
-/* Cards grid */
+/* CARDS */
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 26px;
+  gap: 28px;
   margin-bottom: 50px;
 }
 
-/* Individual card */
+/* INDIVIDUAL CARD */
 .card {
-  padding: 36px 24px;
-  border-radius: 22px;
+  padding: 38px 24px;
+  border-radius: 24px;
+
   background: linear-gradient(
     180deg,
     #ffffff,
-    #f1f5f9
+    #f8fafc
   );
 
-  border: 1px solid #e2e8f0;
+  border: 1px solid #e5e7eb;
   cursor: pointer;
   font-size: 1.1rem;
   font-weight: 600;
+
   transition:
     transform 0.25s ease,
-    box-shadow 0.25s ease,
-    border-color 0.25s ease;
+    box-shadow 0.25s ease;
 }
 
 .card:hover {
-  transform: translateY(-10px);
-  border-color: #cbd5f5;
+  transform: translateY(-12px);
   box-shadow:
-    0 20px 30px rgba(99, 102, 241, 0.15);
+    0 25px 40px rgba(99, 102, 241, 0.2);
 }
 
-/* Main button */
+/* MAIN BUTTON */
 button {
-  padding: 18px 50px;
+  padding: 20px 56px;
   font-size: 18px;
   border-radius: 999px;
   border: none;
@@ -95,7 +98,7 @@ button {
   background: linear-gradient(
     135deg,
     #6366f1,
-    #4f46e5
+    #ec4899
   );
 
   color: white;
@@ -108,7 +111,7 @@ button {
 }
 
 button:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
   box-shadow:
-    0 15px 30px rgba(79, 70, 229, 0.4);
+    0 18px 35px rgba(236, 72, 153, 0.45);
 }
