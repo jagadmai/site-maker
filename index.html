@@ -2,37 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Website Maker</title>
+  <title>Mini Site Builder</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="container">
-    <h1>🛠 Website Maker</h1>
-    <p>Create a website instantly</p>
-
-    <!-- CONTROLS -->
-    <div class="builder">
-      <select id="siteType">
-        <option value="portfolio">Portfolio</option>
-        <option value="business">Business</option>
-        <option value="landing">Landing Page</option>
-      </select>
-
-      <input id="titleInput" placeholder="Website Title">
-      <textarea id="descInput" placeholder="Website Description"></textarea>
-
-      <button id="generateBtn">Generate Website</button>
-    </div>
-
-    <!-- PREVIEW -->
-    <h2>Live Preview</h2>
-    <iframe id="preview"></iframe>
-
-    <button id="copyBtn">Copy HTML Code</button>
+<div class="app">
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <h2>Elements</h2>
+    <button onclick="addHeading()">Add Heading</button>
+    <button onclick="addText()">Add Text</button>
+    <button onclick="addButton()">Add Button</button>
   </div>
 
-  <script src="script.js"></script>
+  <!-- CANVAS -->
+  <div class="canvas">
+    <iframe id="preview"></iframe>
+  </div>
+</div>
+
+<button class="export" onclick="exportHTML()">Export HTML</button>
+
+<script src="script.js"></script>
 </body>
 </html>
