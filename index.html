@@ -4,22 +4,33 @@
   <meta charset="UTF-8">
   <title>Website Maker</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <div class="container">
     <h1>🛠 Website Maker</h1>
-    <p>Create websites without coding</p>
+    <p>Create a website instantly</p>
 
-    <div class="cards">
-      <div class="card">Portfolio Website</div>
-      <div class="card">Business Website</div>
-      <div class="card">Landing Page</div>
+    <!-- CONTROLS -->
+    <div class="builder">
+      <select id="siteType">
+        <option value="portfolio">Portfolio</option>
+        <option value="business">Business</option>
+        <option value="landing">Landing Page</option>
+      </select>
+
+      <input id="titleInput" placeholder="Website Title">
+      <textarea id="descInput" placeholder="Website Description"></textarea>
+
+      <button id="generateBtn">Generate Website</button>
     </div>
 
-    <button id="testBtn">Generate Website</button>
+    <!-- PREVIEW -->
+    <h2>Live Preview</h2>
+    <iframe id="preview"></iframe>
+
+    <button id="copyBtn">Copy HTML Code</button>
   </div>
 
   <script src="script.js"></script>
