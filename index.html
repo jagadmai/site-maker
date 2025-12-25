@@ -2,44 +2,63 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>SiteForge</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SiteForge — Build Websites with AI</title>
 
-  <link rel="stylesheet" href="style.css" />
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- APP CONTAINER -->
-  <div class="app">
-    <div class="card" id="card">
+  <!-- HEADER -->
+  <header>
+    <h1>SiteForge</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Features</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
 
-      <!-- Progress bar -->
-      <div class="progress">
-        <div class="progress-bar" id="progressBar"></div>
+  <!-- MAIN CONTENT -->
+  <div class="main">
+
+    <!-- LEFT SIDE -->
+    <div class="left">
+      <h2>
+        Your Website.<br>
+        Built by AI.
+      </h2>
+
+      <p>
+        Tell us what you want. Our AI generates a real website structure
+        that you can fully customize — design, layout, animations.
+      </p>
+
+      <div class="options">
+        <div class="option">Business</div>
+        <div class="option">Portfolio</div>
+        <div class="option">Startup</div>
+        <div class="option">Blog</div>
+        <div class="option">Other</div>
       </div>
-
-      <!-- Question -->
-      <h2 id="question"></h2>
-
-      <!-- Options -->
-      <div id="options" class="options"></div>
-
-      <!-- Text input (hidden by default) -->
-      <input
-        type="text"
-        id="textInput"
-        placeholder="Type here..."
-        class="hidden"
-      />
-
-      <!-- Next button -->
-      <button id="nextBtn" class="hidden primary">
-        Next
-      </button>
-
     </div>
+
+    <!-- RIGHT SIDE (LIVE PREVIEW MOCK) -->
+    <div class="preview">
+      <div class="bar"></div>
+
+      <div class="box big"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+    </div>
+
   </div>
 
-  <!-- SCRIPT -->
-  <script src="app.js"></script>
+  <!-- JS (optional for later steps) -->
+  <script src="script.js"></script>
 </body>
 </html>
