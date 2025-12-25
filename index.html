@@ -1,30 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Mini Site Builder</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Website Builder</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="app">
-  <!-- SIDEBAR -->
-  <div class="sidebar">
-    <h2>Elements</h2>
-    <button onclick="addHeading()">Add Heading</button>
-    <button onclick="addText()">Add Text</button>
-    <button onclick="addButton()">Add Button</button>
+  <div id="app">
+
+    <!-- Progress -->
+    <div class="progress">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Question Card -->
+    <div class="card" id="card">
+      <h1 id="question">What is this website for?</h1>
+
+      <div class="options" id="options">
+        <!-- options injected by JS -->
+      </div>
+
+      <input
+        type="text"
+        id="textInput"
+        placeholder="Type your answer..."
+        class="hidden"
+      />
+
+      <button id="nextBtn" class="hidden">Next →</button>
+    </div>
+
   </div>
 
-  <!-- CANVAS -->
-  <div class="canvas">
-    <iframe id="preview"></iframe>
-  </div>
-</div>
-
-<button class="export" onclick="exportHTML()">Export HTML</button>
-
-<script src="script.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
