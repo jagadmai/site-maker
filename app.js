@@ -1,51 +1,43 @@
-// Scroll reveal
-const reveals = document.querySelectorAll(".reveal");
-
+// Reveal on scroll
 const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("show");
-    }
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add("show");
   });
 }, { threshold: 0.15 });
 
-reveals.forEach(el => observer.observe(el));
+document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
-// Elements
-const startHero = document.getElementById("startHero");
-const startNav = document.getElementById("startNav");
-const questions = document.getElementById("questions");
-const options = document.querySelectorAll(".option");
+// Flow logic
+const start = document.getElementById("startFlow");
+const flow = document.getElementById("flow");
+const choices = document.querySelectorAll(".choice");
 const otherInput = document.getElementById("otherInput");
-const generate = document.getElementById("generate");
-const loading = document.getElementById("loading");
+const cont = document.getElementById("continue");
+const thinking = document.getElementById("thinking");
 const result = document.getElementById("result");
 
-// Start buttons
-startHero.onclick = startNav.onclick = () => {
-  questions.classList.remove("hidden");
-  questions.scrollIntoView({ behavior: "smooth" });
+start.onclick = () => {
+  flow.classList.remove("hidden");
+  flow.scrollIntoView({ behavior: "smooth" });
 };
 
-// Option click
-options.forEach(btn => {
-  btn.onclick = () => {
-    if (btn.classList.contains("other")) {
+choices.forEach(c => {
+  c.onclick = () => {
+    if (c.classList.contains("other")) {
       otherInput.classList.remove("hidden");
     } else {
       otherInput.classList.add("hidden");
     }
-    generate.classList.remove("hidden");
+    cont.classList.remove("hidden");
   };
 });
 
-// Generate
-generate.onclick = () => {
-  questions.classList.add("hidden");
-  loading.classList.remove("hidden");
+cont.onclick = () => {
+  flow.classList.add("hidden");
+  thinking.classList.remove("hidden");
 
   setTimeout(() => {
-    loading.classList.add("hidden");
+    thinking.classList.add("hidden");
     result.classList.remove("hidden");
     result.scrollIntoView({ behavior: "smooth" });
   }, 2800);
