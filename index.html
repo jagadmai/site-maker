@@ -3,55 +3,84 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SiteForge</title>
+  <title>Buildora</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header class="topbar">
-  <div class="logo">SiteForge</div>
-  <div class="nav">Create • Features • Contact</div>
+  <div class="logo">Buildora</div>
+  <nav>
+    <a href="#">Features</a>
+    <a href="#">How it Works</a>
+    <a href="#">Contact</a>
+  </nav>
 </header>
 
-<main class="container">
+<section class="hero reveal">
+  <h1>
+    Design websites <span class="accent">beautifully</span><br>
+    without thinking about code
+  </h1>
+  <p>
+    Buildora designs a complete website based on how you think — not how you code.
+  </p>
 
-  <!-- INTRO -->
-  <section class="hero" id="hero">
-    <h1>Build beautiful websites<br>without touching code</h1>
-    <p>Answer a few questions. We design the site.</p>
+  <div class="hero-actions">
+    <div class="primary-btn">Create your website</div>
+    <div class="secondary-btn">See how it works</div>
+  </div>
+</section>
 
-    <div class="cta-card" onclick="startFlow()">
-      <span>Create a Website</span>
-      <small>Powered by smart design logic</small>
+<section class="features">
+  <div class="feature reveal">
+    <h3>🎨 Smart Visual Design</h3>
+    <p>Layouts adapt to purpose, audience, and style — automatically.</p>
+  </div>
+
+  <div class="feature reveal">
+    <h3>⚡ Lightning Fast Setup</h3>
+    <p>From idea to preview in seconds, not hours.</p>
+  </div>
+
+  <div class="feature reveal">
+    <h3>📱 Mobile-Perfect</h3>
+    <p>Every design is responsive from the start.</p>
+  </div>
+</section>
+
+<section class="workflow">
+  <h2 class="reveal">How Buildora Works</h2>
+
+  <div class="steps">
+    <div class="step-card reveal">
+      <span>01</span>
+      <h4>You answer a few questions</h4>
+      <p>Purpose, style, vibe — that’s it.</p>
     </div>
-  </section>
 
-  <!-- FLOW -->
-  <section class="flow hidden" id="flow">
-
-    <div class="progress">
-      <div class="step active">Purpose</div>
-      <div class="step">Style</div>
-      <div class="step">Preview</div>
+    <div class="step-card reveal">
+      <span>02</span>
+      <h4>Buildora designs the site</h4>
+      <p>Layouts, spacing, colors, sections.</p>
     </div>
 
-    <div class="question" id="question"></div>
-
-    <div class="options" id="options"></div>
-
-  </section>
-
-  <!-- PREVIEW -->
-  <section class="preview hidden" id="preview">
-    <div class="preview-card">
-      <div class="block big"></div>
-      <div class="block"></div>
-      <div class="block"></div>
+    <div class="step-card reveal">
+      <span>03</span>
+      <h4>You customize & launch</h4>
+      <p>Fine-tune animations, content, and export.</p>
     </div>
-    <p class="building">Designing your site<span class="dots">...</span></p>
-  </section>
+  </div>
+</section>
 
-</main>
+<section class="cta reveal">
+  <h2>Your idea deserves better than templates.</h2>
+  <div class="primary-btn large">Start building with Buildora</div>
+</section>
+
+<footer>
+  <p>© 2025 Buildora • Built for creators</p>
+</footer>
 
 <script src="app.js"></script>
 </body>
