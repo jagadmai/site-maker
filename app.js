@@ -1,47 +1,45 @@
-let step = 1;
-const questions = document.querySelectorAll(".question");
-const nextBtn = document.getElementById("nextBtn");
+// Scroll reveal
+const reveals = document.querySelectorAll(".reveal");
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add("show");
+  });
+}, { threshold: 0.15 });
 
-document.querySelectorAll(".other").forEach(btn => {
-  btn.onclick = () => btn.classList.toggle("active");
-});
+reveals.forEach(r => observer.observe(r));
 
-nextBtn.onclick = () => {
-  questions[step - 1].classList.add("hidden");
-  step++;
-  if (step <= questions.length) {
-    questions[step - 1].classList.remove("hidden");
-  } else {
-    document.getElementById("builder").classList.add("hidden");
-    startLoading();
-  }
+// Logic
+const startBtn = document.getElementById("startBtn");
+const questions = document.getElementById("questions");
+const options = document.querySelectorAll(".option");
+const input = document.getElementById("customInput");
+const generateBtn = document.getElementById("generateBtn");
+const loading = document.getElementById("loading");
+const generated = document.getElementById("generated");
+
+startBtn.onclick = () => {
+  questions.classList.remove("hidden");
+  questions.scrollIntoView({ behavior: "smooth" });
 };
 
-function startLoading() {
-  const loading = document.getElementById("loading");
+options.forEach(opt => {
+  opt.onclick = () => {
+    if (opt.classList.contains("other")) {
+      input.classList.remove("hidden");
+    } else {
+      input.classList.add("hidden");
+    }
+    generateBtn.classList.remove("hidden");
+  };
+});
+
+generateBtn.onclick = () => {
+  questions.classList.add("hidden");
   loading.classList.remove("hidden");
 
   setTimeout(() => {
     loading.classList.add("hidden");
-    document.getElementById("website").classList.remove("hidden");
-    revealOnScroll();
-  }, 3500);
-}
-
-function revealOnScroll() {
-  const reveals = document.querySelectorAll(".reveal");
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add("show");
-    });
-  }, { threshold: 0.2 });
-
-  reveals.forEach(r => observer.observe(r));
-}
-
-document.querySelectorAll(".templateBtn").forEach(btn => {
-  btn.onclick = () => {
-    document.querySelector(".hero h1").innerText =
-      btn.innerText + " Website";
-  };
-});
+    generated.classList.remove("hidden");
+    generated.scrollIntoView({ behavior: "smooth" });
+  }, 3000);
+};
