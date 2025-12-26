@@ -1,166 +1,106 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Inter", sans-serif;
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter}
+
+body{
+  background:linear-gradient(120deg,#ff6ec4,#7873f5,#22d3ee,#4ade80);
+  background-size:300% 300%;
+  animation:bg 20s infinite ease;
+  color:white;
+  min-height:100vh;
 }
 
-body {
-  min-height: 100vh;
-  background: linear-gradient(120deg, #ff6ec4, #7873f5, #4ade80, #38bdf8);
-  background-size: 300% 300%;
-  animation: bgMove 18s ease infinite;
-  color: white;
+@keyframes bg{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
 
-@keyframes bgMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+header{
+  padding:24px 50px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
-/* HEADER */
-.header {
-  padding: 24px 48px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.logo{font-size:28px;font-weight:800}
+
+button{
+  padding:14px 22px;
+  border-radius:14px;
+  border:none;
+  cursor:pointer;
+  font-weight:600;
 }
 
-.logo {
-  font-weight: 800;
-  font-size: 28px;
+main{
+  display:flex;
+  padding:60px;
+  gap:60px;
 }
 
-nav a {
-  margin-left: 28px;
-  color: white;
-  text-decoration: none;
-  opacity: 0.8;
-}
-nav a:hover { opacity: 1; }
-
-/* MAIN */
-.main {
-  display: flex;
-  padding: 60px 80px;
-  gap: 80px;
+#flow{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
 }
 
-/* LEFT */
-.left {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+#choices{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
 }
 
-.question {
-  font-size: 22px;
-  opacity: 0.95;
-  transition: all 0.4s ease;
+.choice{
+  background:rgba(255,255,255,.2);
+  padding:14px 20px;
+  border-radius:14px;
+  cursor:pointer;
+  transition:.4s;
 }
 
-.options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  transition: all 0.4s ease;
+.choice.active{
+  background:white;
+  color:black;
 }
 
-.option {
-  padding: 14px 22px;
-  border-radius: 14px;
-  background: rgba(255,255,255,0.18);
-  cursor: pointer;
-  transition: all 0.35s ease;
-}
-.option:hover { transform: translateY(-3px); }
-.option.active {
-  background: white;
-  color: black;
-  font-weight: 600;
+#otherField{
+  display:none;
+  padding:14px;
+  border-radius:14px;
+  border:none;
 }
 
-/* OTHER */
-.other-input { display: none; }
-.other-input input {
-  width: 100%;
-  padding: 16px;
-  border-radius: 14px;
-  border: none;
-  outline: none;
-  font-size: 16px;
+#aiLoading{
+  display:none;
+  font-size:18px;
 }
 
-/* CONTINUE */
-button {
-  padding: 16px;
-  border-radius: 16px;
-  border: none;
-  font-weight: 600;
-  font-size: 16px;
-  cursor: pointer;
-  opacity: 0.4;
-  transition: all 0.4s ease;
-}
-button:enabled {
-  opacity: 1;
-  background: white;
-  color: black;
+.dots{
+  animation:blink 1.4s infinite;
 }
 
-/* AI */
-.ai-thinking {
-  display: none;
-  font-size: 18px;
-}
-
-.dots span {
-  animation: dot 1.4s infinite;
-}
-.dots span:nth-child(2){animation-delay:.2s}
-.dots span:nth-child(3){animation-delay:.4s}
-
-@keyframes dot {
+@keyframes blink{
   0%{opacity:0}
   50%{opacity:1}
   100%{opacity:0}
 }
 
-/* PREVIEW */
-.preview {
-  flex: 1;
-  background: rgba(0,0,0,0.25);
-  border-radius: 26px;
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  transition: all 0.6s ease;
+/* BUILDER */
+#builder{
+  flex:1;
+  display:none;
+  flex-direction:column;
+  gap:20px;
 }
 
-.preview-bar {
-  height: 14px;
-  background: rgba(255,255,255,0.4);
-  border-radius: 8px;
+.toolbar{
+  display:flex;
+  gap:12px;
 }
 
-.preview-box {
-  height: 70px;
-  border-radius: 18px;
-  background: rgba(255,255,255,0.35);
-  transition: all 0.6s ease;
+iframe{
+  flex:1;
+  border:none;
+  border-radius:22px;
+  background:white;
 }
-
-.preview-box.hero { height: 120px; }
-
-/* VARIANTS */
-.preview.minimal .preview-box { height: 60px; }
-.preview.bold .preview-box { height: 95px; background: rgba(0,0,0,0.55); }
-.preview.creative .preview-box {
-  background: linear-gradient(135deg, #f472b6, #60a5fa);
-}
-.preview.business .hero { height: 150px; }
-.preview.portfolio .preview-box { border-radius: 30px; }
-.preview.blog .preview-box { height: 50px; }

@@ -1,94 +1,93 @@
-const questionText = document.getElementById("questionText");
-const optionsEl = document.getElementById("options");
-const continueBtn = document.getElementById("continueBtn");
-const otherInput = document.getElementById("otherInput");
-const otherText = document.getElementById("otherText");
-const aiThinking = document.getElementById("aiThinking");
-const preview = document.getElementById("preview");
-
-let step = 0;
-let selected = null;
-const answers = [];
-
-const questions = [
-  {
-    q: "What type of website do you want to create?",
-    o: ["Business", "Portfolio", "Startup", "Blog", "Other"]
-  },
-  {
-    q: "What is the main goal?",
-    o: ["Sell", "Show work", "Grow audience", "Inform", "Other"]
-  },
-  {
-    q: "Preferred style?",
-    o: ["Minimal", "Bold", "Creative", "Professional", "Other"]
-  }
+const questions=[
+ {q:"What type of site?",o:["Business","Portfolio","Blog","Other"]},
+ {q:"Main goal?",o:["Sell","Showcase","Audience","Other"]},
+ {q:"Style?",o:["Minimal","Bold","Creative","Other"]}
 ];
 
-loadQuestion();
+let step=0,answers=[];
+const qEl=document.getElementById("question");
+const cEl=document.getElementById("choices");
+const nextBtn=document.getElementById("nextBtn");
+const other=document.getElementById("otherField");
+const ai=document.getElementById("aiLoading");
+const builder=document.getElementById("builder");
+const frame=document.getElementById("previewFrame");
 
-function loadQuestion() {
-  const data = questions[step];
-  questionText.textContent = data.q;
-  optionsEl.innerHTML = "";
-  continueBtn.disabled = true;
-  otherInput.style.display = "none";
-  otherText.value = "";
+loadQ();
 
-  data.o.forEach(opt => {
-    const d = document.createElement("div");
-    d.className = "option";
-    d.textContent = opt;
-    d.onclick = () => selectOption(d, opt);
-    optionsEl.appendChild(d);
-  });
+function loadQ(){
+ qEl.innerText=questions[step].q;
+ cEl.innerHTML="";
+ nextBtn.disabled=true;
+ other.style.display="none";
+
+ questions[step].o.forEach(opt=>{
+  const d=document.createElement("div");
+  d.className="choice";
+  d.innerText=opt;
+  d.onclick=()=>{
+   document.querySelectorAll(".choice").forEach(c=>c.classList.remove("active"));
+   d.classList.add("active");
+   if(opt==="Other"){other.style.display="block";nextBtn.disabled=true}
+   else{other.style.display="none";nextBtn.disabled=false}
+   nextBtn.dataset.val=opt;
+  };
+  cEl.appendChild(d);
+ });
 }
 
-function selectOption(el, value) {
-  document.querySelectorAll(".option").forEach(o => o.classList.remove("active"));
-  el.classList.add("active");
-  selected = value;
+other.oninput=()=>nextBtn.disabled=other.value.trim()==="";
 
-  if (value === "Other") {
-    otherInput.style.display = "block";
-    continueBtn.disabled = true;
-    otherText.focus();
-  } else {
-    otherInput.style.display = "none";
-    continueBtn.disabled = false;
-  }
-}
-
-otherText.oninput = () => {
-  continueBtn.disabled = otherText.value.trim() === "";
+nextBtn.onclick=()=>{
+ answers.push(nextBtn.dataset.val==="Other"?other.value:nextBtn.dataset.val);
+ step++;
+ step<questions.length?loadQ():build();
 };
 
-continueBtn.onclick = () => {
-  answers.push(selected === "Other" ? otherText.value : selected);
-  applyPreview(selected);
-  step++;
+function build(){
+ cEl.style.display="none";
+ nextBtn.style.display="none";
+ other.style.display="none";
+ ai.style.display="block";
 
-  if (step < questions.length) {
-    loadQuestion();
-  } else {
-    finish();
-  }
-};
+ let dots=0;
+ const t=setInterval(()=>{
+  ai.innerText="AI is building your website"+".".repeat(dots%4);
+  dots++;
+ },300);
 
-function applyPreview(value) {
-  const v = value.toLowerCase();
-  if (v.includes("minimal")) preview.classList.add("minimal");
-  if (v.includes("bold")) preview.classList.add("bold");
-  if (v.includes("creative")) preview.classList.add("creative");
-  if (v.includes("business")) preview.classList.add("business");
-  if (v.includes("portfolio")) preview.classList.add("portfolio");
-  if (v.includes("blog")) preview.classList.add("blog");
+ setTimeout(()=>{
+  clearInterval(t);
+  document.getElementById("flow").style.display="none";
+  builder.style.display="flex";
+  generateSite();
+ },3500);
 }
 
-function finish() {
-  optionsEl.style.display = "none";
-  continueBtn.style.display = "none";
-  otherInput.style.display = "none";
-  questionText.textContent = "Building your website with AI";
-  aiThinking.style.display = "block";
+function generateSite(){
+ const html=`
+ <html>
+ <head>
+ <style>
+ body{font-family:Inter;padding:40px;animation:fade .8s}
+ @keyframes fade{from{opacity:0}to{opacity:1}}
+ h1{font-size:42px}
+ section{margin-top:30px}
+ </style>
+ </head>
+ <body contenteditable="true">
+ <h1>Your AI Website</h1>
+ <section>This content is fully editable.</section>
+ <section>Add sections. Change text. Make it yours.</section>
+ </body>
+ </html>`;
+ frame.srcdoc=html;
+}
+
+function exportSite(){
+ const blob=new Blob([frame.srcdoc],{type:"text/html"});
+ const a=document.createElement("a");
+ a.href=URL.createObjectURL(blob);
+ a.download="siteforge-site.html";
+ a.click();
 }
