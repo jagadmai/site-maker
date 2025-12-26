@@ -1,21 +1,41 @@
-// STEP 1: basic option selection logic
-
 const options = document.querySelectorAll(".option");
 const continueBtn = document.getElementById("continueBtn");
+const otherInput = document.getElementById("otherInput");
+const otherText = document.getElementById("otherText");
+const aiThinking = document.getElementById("aiThinking");
 
-let selectedAnswer = null;
+let selectedValue = null;
 
 options.forEach(option => {
   option.addEventListener("click", () => {
 
-    // remove active from all
     options.forEach(o => o.classList.remove("active"));
-
-    // mark selected
     option.classList.add("active");
-    selectedAnswer = option.innerText;
 
-    // enable continue button
-    continueBtn.disabled = false;
+    selectedValue = option.innerText;
+
+    if (selectedValue === "Other") {
+      otherInput.style.display = "block";
+      otherText.focus();
+      continueBtn.disabled = true;
+    } else {
+      otherInput.style.display = "none";
+      continueBtn.disabled = false;
+    }
   });
+});
+
+otherText.addEventListener("input", () => {
+  continueBtn.disabled = otherText.value.trim() === "";
+});
+
+continueBtn.addEventListener("click", () => {
+
+  aiThinking.style.display = "block";
+  continueBtn.disabled = true;
+
+  setTimeout(() => {
+    aiThinking.style.display = "none";
+    alert("AI finished generating a sample website ✨ (next step)");
+  }, 5000);
 });

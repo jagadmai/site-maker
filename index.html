@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SiteForge — Build Websites with AI</title>
+  <meta charset="UTF-8">
+  <title>SiteForge — AI Website Builder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Font -->
+  <!-- FONT -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
 
   <!-- CSS -->
@@ -14,54 +14,64 @@
 <body>
 
   <!-- HEADER -->
-  <header>
-    <h1>SiteForge</h1>
-    <nav>
+  <header class="header">
+    <div class="logo">SiteForge</div>
+    <nav class="nav">
       <a href="#">Home</a>
       <a href="#">Features</a>
       <a href="#">Contact</a>
     </nav>
   </header>
 
-  <!-- MAIN CONTENT -->
-  <div class="main">
+  <!-- MAIN -->
+  <main class="main">
 
-    <!-- LEFT SIDE -->
-    <div class="left">
-      <h2>
-        Your Website.<br>
-        Built by AI.
-      </h2>
+    <!-- LEFT PANEL -->
+    <section class="left">
 
-      <p>
-        Tell us what you want. Our AI generates a real website structure
-        that you can fully customize — design, layout, animations.
+      <p class="question" id="questionText">
+        What type of website do you want to create?
       </p>
 
-      <div class="options">
+      <div class="options" id="options">
         <div class="option">Business</div>
         <div class="option">Portfolio</div>
         <div class="option">Startup</div>
         <div class="option">Blog</div>
         <div class="option">Other</div>
       </div>
-    </div>
-<button id="continueBtn" class="continue-btn" disabled>
-  Continue →
-</button>
 
-    <!-- RIGHT SIDE (LIVE PREVIEW MOCK) -->
-    <div class="preview">
-      <div class="bar"></div>
+      <!-- OTHER INPUT -->
+      <div class="other-input" id="otherInput">
+        <input type="text" id="otherText" placeholder="Type your idea here..." />
+      </div>
 
-      <div class="box big"></div>
-      <div class="box"></div>
-      <div class="box"></div>
-    </div>
+      <!-- CONTINUE -->
+      <button id="continueBtn" class="continue-btn" disabled>
+        Continue →
+      </button>
 
-  </div>
+      <!-- AI THINKING -->
+      <div class="ai-thinking" id="aiThinking">
+        <span id="aiText">Designing your website</span>
+        <span class="dots">
+          <span>.</span><span>.</span><span>.</span>
+        </span>
+      </div>
 
-  <!-- JS (optional for later steps) -->
+    </section>
+
+    <!-- RIGHT PREVIEW -->
+    <section class="preview">
+      <div class="preview-bar"></div>
+      <div class="preview-box big"></div>
+      <div class="preview-box"></div>
+      <div class="preview-box"></div>
+    </section>
+
+  </main>
+
+  <!-- JS -->
   <script src="app.js"></script>
 </body>
 </html>
