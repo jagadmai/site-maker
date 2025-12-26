@@ -1,7 +1,7 @@
 const questions=[
  {q:"What type of site?",o:["Business","Portfolio","Blog","Other"]},
  {q:"Main goal?",o:["Sell","Showcase","Audience","Other"]},
- {q:"Style?",o:["Minimal","Bold","Creative","Other"]}
+ {q:"Style?",o:["Minimal","Bold","Aesthetic","Creative","Other"]}
 ];
 
 let step=0,answers=[];
@@ -91,3 +91,5 @@ function exportSite(){
  a.download="siteforge-site.html";
  a.click();
 }
+
+
