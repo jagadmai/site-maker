@@ -1,78 +1,53 @@
 const questionText = document.getElementById("questionText");
-const optionsContainer = document.getElementById("options");
+const optionsEl = document.getElementById("options");
 const continueBtn = document.getElementById("continueBtn");
 const otherInput = document.getElementById("otherInput");
 const otherText = document.getElementById("otherText");
 const aiThinking = document.getElementById("aiThinking");
-const preview = document.querySelector(".preview");
+const preview = document.getElementById("preview");
 
-let currentQuestion = 0;
-let selectedValue = null;
-const answers = {};
+let step = 0;
+let selected = null;
+const answers = [];
 
-// ALL QUESTIONS (you can add more later)
 const questions = [
   {
-    text: "What type of website do you want to create?",
-    options: ["Business", "Portfolio", "Startup", "Blog", "Other"]
+    q: "What type of website do you want to create?",
+    o: ["Business", "Portfolio", "Startup", "Blog", "Other"]
   },
   {
-    text: "What is the main purpose of your website?",
-    options: ["Sell products", "Show work", "Grow audience", "Share info", "Other"]
+    q: "What is the main goal?",
+    o: ["Sell", "Show work", "Grow audience", "Inform", "Other"]
   },
   {
-    text: "Who is your target audience?",
-    options: ["Students", "Professionals", "Creators", "Everyone", "Other"]
-  },
-  {
-    text: "What style do you prefer?",
-    options: ["Minimal", "Bold", "Creative", "Professional", "Other"]
+    q: "Preferred style?",
+    o: ["Minimal", "Bold", "Creative", "Professional", "Other"]
   }
 ];
 
-// INITIAL LOAD
-renderQuestion();
+loadQuestion();
 
-// FUNCTIONS
-
-function renderQuestion() {
-  const q = questions[currentQuestion];
-
-  // reset state
-  selectedValue = null;
+function loadQuestion() {
+  const data = questions[step];
+  questionText.textContent = data.q;
+  optionsEl.innerHTML = "";
   continueBtn.disabled = true;
   otherInput.style.display = "none";
   otherText.value = "";
 
-  // animate out
-  questionText.style.opacity = 0;
-  optionsContainer.style.opacity = 0;
-
-  setTimeout(() => {
-    // update text
-    questionText.innerText = q.text;
-
-    // rebuild options
-    optionsContainer.innerHTML = "";
-    q.options.forEach(opt => {
-      const div = document.createElement("div");
-      div.className = "option";
-      div.innerText = opt;
-
-      div.addEventListener("click", () => handleOptionClick(div, opt));
-      optionsContainer.appendChild(div);
-    });
-
-    // animate in
-    questionText.style.opacity = 1;
-    optionsContainer.style.opacity = 1;
-  }, 300);
+  data.o.forEach(opt => {
+    const d = document.createElement("div");
+    d.className = "option";
+    d.textContent = opt;
+    d.onclick = () => selectOption(d, opt);
+    optionsEl.appendChild(d);
+  });
 }
 
-function handleOptionClick(element, value) {
+function selectOption(el, value) {
   document.querySelectorAll(".option").forEach(o => o.classList.remove("active"));
-  element.classList.add("active");
-  selectedValue = value;
+  el.classList.add("active");
+  selected = value;
 
   if (value === "Other") {
     otherInput.style.display = "block";
@@ -84,47 +59,36 @@ function handleOptionClick(element, value) {
   }
 }
 
-otherText.addEventListener("input", () => {
+otherText.oninput = () => {
   continueBtn.disabled = otherText.value.trim() === "";
-});
+};
 
-continueBtn.addEventListener("click", () => {
-  // save answer
-  answers[currentQuestion] = selectedValue === "Other"
-    ? otherText.value.trim()
-    : selectedValue;
+continueBtn.onclick = () => {
+  answers.push(selected === "Other" ? otherText.value : selected);
+  applyPreview(selected);
+  step++;
 
-  currentQuestion++;
-
-  if (currentQuestion < questions.length) {
-    renderQuestion();
+  if (step < questions.length) {
+    loadQuestion();
   } else {
-    startAIThinking();
+    finish();
   }
-});
+};
 
-function startAIThinking() {
+function applyPreview(value) {
+  const v = value.toLowerCase();
+  if (v.includes("minimal")) preview.classList.add("minimal");
+  if (v.includes("bold")) preview.classList.add("bold");
+  if (v.includes("creative")) preview.classList.add("creative");
+  if (v.includes("business")) preview.classList.add("business");
+  if (v.includes("portfolio")) preview.classList.add("portfolio");
+  if (v.includes("blog")) preview.classList.add("blog");
+}
 
-  // clear previous styles
-  preview.className = "preview";
-
-  // apply style based on answers
-  Object.values(answers).forEach(answer => {
-    const val = answer.toLowerCase();
-
-    if (val.includes("minimal")) preview.classList.add("minimal");
-    if (val.includes("bold")) preview.classList.add("bold");
-    if (val.includes("creative")) preview.classList.add("creative");
-
-    if (val.includes("business")) preview.classList.add("business");
-    if (val.includes("portfolio")) preview.classList.add("portfolio");
-    if (val.includes("blog")) preview.classList.add("blog");
-  });
-
-  optionsContainer.style.display = "none";
+function finish() {
+  optionsEl.style.display = "none";
   continueBtn.style.display = "none";
   otherInput.style.display = "none";
-
-  questionText.innerText = "Building your website with AI";
+  questionText.textContent = "Building your website with AI";
   aiThinking.style.display = "block";
 }

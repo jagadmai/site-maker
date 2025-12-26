@@ -7,19 +7,13 @@
 
 body {
   min-height: 100vh;
-  background: linear-gradient(
-    120deg,
-    #ff6ec4,
-    #7873f5,
-    #4ade80,
-    #38bdf8
-  );
+  background: linear-gradient(120deg, #ff6ec4, #7873f5, #4ade80, #38bdf8);
   background-size: 300% 300%;
-  animation: gradientMove 18s ease infinite;
+  animation: bgMove 18s ease infinite;
   color: white;
 }
 
-@keyframes gradientMove {
+@keyframes bgMove {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
@@ -27,27 +21,24 @@ body {
 
 /* HEADER */
 .header {
-  padding: 20px 40px;
+  padding: 24px 48px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .logo {
-  font-size: 26px;
   font-weight: 800;
+  font-size: 28px;
 }
 
-.nav a {
-  margin-left: 24px;
-  text-decoration: none;
+nav a {
+  margin-left: 28px;
   color: white;
-  opacity: 0.85;
+  text-decoration: none;
+  opacity: 0.8;
 }
-
-.nav a:hover {
-  opacity: 1;
-}
+nav a:hover { opacity: 1; }
 
 /* MAIN */
 .main {
@@ -65,146 +56,111 @@ body {
 }
 
 .question {
-  font-size: 20px;
-  opacity: 0.9;
+  font-size: 22px;
+  opacity: 0.95;
+  transition: all 0.4s ease;
 }
 
 .options {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
+  transition: all 0.4s ease;
 }
 
 .option {
   padding: 14px 22px;
   border-radius: 14px;
-  background: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.18);
   cursor: pointer;
   transition: all 0.35s ease;
 }
-
-.option:hover {
-  background: rgba(255,255,255,0.25);
-  transform: translateY(-2px);
-}
-
+.option:hover { transform: translateY(-3px); }
 .option.active {
   background: white;
   color: black;
   font-weight: 600;
 }
 
-/* OTHER INPUT */
-.other-input {
-  display: none;
-}
-
+/* OTHER */
+.other-input { display: none; }
 .other-input input {
   width: 100%;
   padding: 16px;
-  border-radius: 12px;
+  border-radius: 14px;
   border: none;
   outline: none;
   font-size: 16px;
 }
 
-/* CONTINUE BUTTON */
-.continue-btn {
-  margin-top: 10px;
+/* CONTINUE */
+button {
   padding: 16px;
-  border-radius: 14px;
+  border-radius: 16px;
   border: none;
-  font-size: 16px;
   font-weight: 600;
+  font-size: 16px;
   cursor: pointer;
-  background: rgba(255,255,255,0.25);
-  color: white;
   opacity: 0.4;
   transition: all 0.4s ease;
 }
-
-.continue-btn:enabled {
+button:enabled {
   opacity: 1;
   background: white;
   color: black;
 }
 
-/* AI THINKING */
+/* AI */
 .ai-thinking {
   display: none;
-  margin-top: 20px;
   font-size: 18px;
 }
 
 .dots span {
-  animation: dotBounce 1.4s infinite;
+  animation: dot 1.4s infinite;
 }
+.dots span:nth-child(2){animation-delay:.2s}
+.dots span:nth-child(3){animation-delay:.4s}
 
-.dots span:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.dots span:nth-child(3) {
-  animation-delay: 0.4s;
-}
-
-@keyframes dotBounce {
-  0% { opacity: 0; }
-  50% { opacity: 1; }
-  100% { opacity: 0; }
+@keyframes dot {
+  0%{opacity:0}
+  50%{opacity:1}
+  100%{opacity:0}
 }
 
 /* PREVIEW */
 .preview {
   flex: 1;
   background: rgba(0,0,0,0.25);
-  border-radius: 24px;
+  border-radius: 26px;
   padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  transition: all 0.6s ease;
 }
 
 .preview-bar {
   height: 14px;
-  border-radius: 8px;
   background: rgba(255,255,255,0.4);
+  border-radius: 8px;
 }
 
 .preview-box {
   height: 70px;
-  border-radius: 16px;
+  border-radius: 18px;
   background: rgba(255,255,255,0.35);
+  transition: all 0.6s ease;
 }
 
-.preview-box.big {
-  height: 120px;
-}
-/* ===== PREVIEW VARIANTS ===== */
+.preview-box.hero { height: 120px; }
 
-.preview.minimal .preview-box {
-  background: rgba(255,255,255,0.25);
-  height: 60px;
-}
-
-.preview.bold .preview-box {
-  background: rgba(0,0,0,0.5);
-  height: 90px;
-}
-
+/* VARIANTS */
+.preview.minimal .preview-box { height: 60px; }
+.preview.bold .preview-box { height: 95px; background: rgba(0,0,0,0.55); }
 .preview.creative .preview-box {
   background: linear-gradient(135deg, #f472b6, #60a5fa);
-  height: 80px;
 }
-
-.preview.business .preview-box.big {
-  height: 140px;
-}
-
-.preview.portfolio .preview-box {
-  border-radius: 30px;
-}
-
-.preview.blog .preview-box {
-  height: 50px;
-}
+.preview.business .hero { height: 150px; }
+.preview.portfolio .preview-box { border-radius: 30px; }
+.preview.blog .preview-box { height: 50px; }
