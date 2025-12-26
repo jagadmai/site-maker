@@ -12,3 +12,24 @@ const observer = new IntersectionObserver(
 );
 
 reveals.forEach(el => observer.observe(el));
+// Button interactions
+document.getElementById("startBtn")?.addEventListener("click", () => {
+  document.getElementById("start")?.scrollIntoView({
+    behavior: "smooth"
+  });
+});
+
+document.getElementById("howBtn")?.addEventListener("click", () => {
+  document.getElementById("how")?.scrollIntoView({
+    behavior: "smooth"
+  });
+});
+
+// Make CTA button reusable
+document.querySelectorAll(".primary-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.getElementById("start")?.scrollIntoView({
+      behavior: "smooth"
+    });
+  });
+});
