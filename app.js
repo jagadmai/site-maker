@@ -4,6 +4,7 @@ const continueBtn = document.getElementById("continueBtn");
 const otherInput = document.getElementById("otherInput");
 const otherText = document.getElementById("otherText");
 const aiThinking = document.getElementById("aiThinking");
+const preview = document.querySelector(".preview");
 
 let currentQuestion = 0;
 let selectedValue = null;
