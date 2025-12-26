@@ -104,9 +104,27 @@ continueBtn.addEventListener("click", () => {
 });
 
 function startAIThinking() {
+
+  // clear previous styles
+  preview.className = "preview";
+
+  // apply style based on answers
+  Object.values(answers).forEach(answer => {
+    const val = answer.toLowerCase();
+
+    if (val.includes("minimal")) preview.classList.add("minimal");
+    if (val.includes("bold")) preview.classList.add("bold");
+    if (val.includes("creative")) preview.classList.add("creative");
+
+    if (val.includes("business")) preview.classList.add("business");
+    if (val.includes("portfolio")) preview.classList.add("portfolio");
+    if (val.includes("blog")) preview.classList.add("blog");
+  });
+
   optionsContainer.style.display = "none";
   continueBtn.style.display = "none";
   otherInput.style.display = "none";
+
   questionText.innerText = "Building your website with AI";
   aiThinking.style.display = "block";
 }
