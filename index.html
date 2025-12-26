@@ -1,32 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Buildly — Websites Built From Ideas</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Buildly — Create Websites Instantly</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <!-- NAV -->
   <nav class="nav">
     <div class="logo">Buildly</div>
-    <div class="nav-actions">
-      <button class="ghost">Sign in</button>
-      <button class="primary">Get Started</button>
-    </div>
+    <button id="startNav" class="nav-btn">Get Started</button>
   </nav>
 
   <!-- HERO -->
   <section class="hero reveal">
-    <h1>Your website.<br><span>Built from ideas.</span></h1>
-    <p>Answer a few questions. Buildly creates a smooth, modern website you can customize.</p>
-    <button id="startBtn" class="primary big">Start Building</button>
+    <h1>
+      Your website.<br>
+      <span>Built from your ideas.</span>
+    </h1>
+    <p>Answer a few questions. Buildly designs a smooth, modern website.</p>
+    <button id="startHero" class="main-btn">Start Building</button>
   </section>
 
   <!-- QUESTIONS -->
   <section id="questions" class="questions hidden">
-    <h2 class="reveal">What are you building?</h2>
+    <h2 class="reveal">What is your website for?</h2>
 
     <div class="options">
       <button class="option">Portfolio</button>
@@ -36,47 +36,30 @@
       <button class="option other">Other</button>
     </div>
 
-    <input id="customInput" class="hidden input" placeholder="Describe your idea..." />
-    <button id="generateBtn" class="primary hidden">Generate Website</button>
+    <input id="otherInput" class="hidden input" placeholder="Type your idea..." />
+    <button id="generate" class="main-btn hidden">Generate Website</button>
   </section>
 
-  <!-- AI LOADING -->
+  <!-- LOADING -->
   <section id="loading" class="loading hidden">
-    <p>Buildly is designing your site<span class="dots">...</span></p>
+    <p>Buildly is creating your website<span class="dots">...</span></p>
   </section>
 
-  <!-- GENERATED SITE -->
-  <section id="generated" class="generated hidden">
-    <h2 class="reveal">Your Buildly Website</h2>
+  <!-- RESULT -->
+  <section id="result" class="result hidden">
+    <h2 class="reveal">Your Website Is Ready</h2>
 
-    <div class="site-preview reveal">
-      <h3>Welcome to your space</h3>
+    <div class="card reveal">
+      <h3>Welcome to your new website</h3>
       <p class="highlight">
-        Designed with a clean layout, smooth animations, and a unique color rhythm.
+        Designed with smooth animations, smart colors, and a modern layout.
       </p>
-      <button class="primary">Edit Design</button>
+      <button class="main-btn">Edit Design</button>
     </div>
   </section>
 
-  <!-- FEATURES -->
-  <section class="features">
-    <div class="feature reveal">
-      <h3>⚡ Fast Setup</h3>
-      <p>Create full websites in minutes.</p>
-    </div>
-    <div class="feature reveal">
-      <h3>🎨 Smart Design</h3>
-      <p>Color patterns that feel intentional.</p>
-    </div>
-    <div class="feature reveal">
-      <h3>📱 Mobile Ready</h3>
-      <p>Looks good everywhere.</p>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
   <footer class="footer">
-    <p>© 2025 Buildly</p>
+    © 2025 Buildly
   </footer>
 
   <script src="app.js"></script>
