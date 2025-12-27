@@ -8,104 +8,76 @@
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav class="nav">
-    <div class="logo">Buildly</div>
-    <div class="nav-actions">
-      <span class="nav-link">How it works</span>
-      <span class="nav-link">Examples</span>
-      <button id="startBtn" class="nav-btn">Start</button>
-    </div>
-  </nav>
+<nav class="nav">
+  <div class="logo">Buildly</div>
+  <button id="startBtn" class="nav-btn">Start</button>
+</nav>
 
-  <!-- HERO -->
-  <section class="hero">
-    <h1 class="reveal">
-      Websites that <span class="grad">understand</span><br>
-      what you’re building
-    </h1>
-    <p class="hero-sub reveal">
-      Buildly designs websites from intent — not templates.
+<section class="hero">
+  <h1 class="reveal">
+    Websites that <span class="grad">feel right</span><br>
+    while you scroll
+  </h1>
+  <p class="hero-sub reveal">
+    Buildly designs sites people remember.
+  </p>
+  <button id="startBtn2" class="cta reveal">Begin</button>
+</section>
+
+<!-- FLOW -->
+<section id="flow" class="flow hidden">
+  <div class="flow-card reveal">
+    <h2 id="question">What are you building?</h2>
+    <div id="choices" class="choices"></div>
+    <button id="nextBtn" class="cta small hidden">Next</button>
+  </div>
+</section>
+
+<section id="thinking" class="thinking hidden">
+  <p>Designing your site<span class="dots"></span></p>
+</section>
+
+<main id="result" class="result hidden">
+
+  <section class="section reveal">
+    <h2>Your vision</h2>
+    <p class="focus" id="visionText"></p>
+  </section>
+
+  <section class="section reveal">
+    <h2>How people experience it</h2>
+    <p>They scroll.</p>
+    <p class="focus">Key ideas glow as they move.</p>
+    <p>This keeps Gen-Z engaged and older users comfortable.</p>
+  </section>
+
+  <section class="section highlight reveal">
+    <h2>Color pattern</h2>
+    <p>
+      A repeating rhythm of color creates recognition.<br>
+      People remember it even after closing the tab.
     </p>
-    <button class="cta reveal" id="startBtn2">Begin</button>
   </section>
 
-  <!-- QUESTION -->
-  <section id="flow" class="flow hidden">
-    <div class="flow-card reveal">
-      <h2>What are you building?</h2>
-
-      <div class="choices">
-        <div class="choice">Personal brand</div>
-        <div class="choice">Startup / product</div>
-        <div class="choice">Online store</div>
-        <div class="choice">Community</div>
-        <div class="choice other">Other</div>
-      </div>
-
-      <input id="otherInput" class="hidden" placeholder="Describe it yourself…" />
-      <button id="continueBtn" class="cta small hidden">Continue</button>
-    </div>
+  <section class="section reveal">
+    <h2>Why this works</h2>
+    <p>Fast clarity.</p>
+    <p class="focus">Emotion without overload.</p>
+    <p>Design that respects attention.</p>
   </section>
 
-  <!-- THINKING -->
-  <section id="thinking" class="thinking hidden">
-    <p>Buildly is designing your site<span class="dots"></span></p>
+  <section class="section reveal">
+    <h2>Next step</h2>
+    <p>This is your foundation.</p>
+    <button class="cta">Customize</button>
   </section>
 
-  <!-- RESULT -->
-  <main id="result" class="result hidden">
+</main>
 
-    <section class="section reveal">
-      <h2>Your intent</h2>
-      <p class="focus">
-        You want clarity, motion, and credibility — without noise.
-      </p>
-    </section>
+<footer class="footer">
+  © 2025 Buildly
+</footer>
 
-    <section class="section reveal">
-      <h2>Recommended structure</h2>
-      <ul>
-        <li><span>Hero</span> that explains purpose instantly</li>
-        <li><span>Scrolling narrative</span> instead of blocks</li>
-        <li><span>Color rhythm</span> that becomes recognizable</li>
-        <li><span>Motion</span> that guides attention</li>
-      </ul>
-    </section>
-
-    <section class="section highlight reveal">
-      <h2>Design language</h2>
-      <p>
-        Dark base.  
-        Controlled color.  
-        Smooth cinematic motion.
-      </p>
-    </section>
-
-    <section class="section reveal">
-      <h2>Why this works</h2>
-      <p>
-        People decide in seconds.
-      </p>
-      <p class="focus">
-        Buildly designs for how users actually scroll.
-      </p>
-    </section>
-
-    <section class="section reveal">
-      <h2>Next step</h2>
-      <p>
-        This is a foundation. You can now customize, animate, and refine.
-      </p>
-      <button class="cta">Edit this site</button>
-    </section>
-
-  </main>
-
-  <footer class="footer">
-    <p>© 2025 Buildly</p>
-  </footer>
-
-  <script src="app.js"></script>
+<script src="app.js"></script>
 </body>
 </html>

@@ -1,50 +1,84 @@
-// Scroll reveal
-const revealEls = document.querySelectorAll(".reveal");
-
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("show");
-    }
-  });
-}, { threshold: 0.15 });
-
-revealEls.forEach(el => observer.observe(el));
-
-// Flow logic
 const startBtns = document.querySelectorAll("#startBtn, #startBtn2");
 const flow = document.getElementById("flow");
-const choices = document.querySelectorAll(".choice");
-const otherInput = document.getElementById("otherInput");
-const continueBtn = document.getElementById("continueBtn");
+const questionEl = document.getElementById("question");
+const choicesEl = document.getElementById("choices");
+const nextBtn = document.getElementById("nextBtn");
 const thinking = document.getElementById("thinking");
 const result = document.getElementById("result");
+const visionText = document.getElementById("visionText");
+
+const answers = [];
+
+const questions = [
+  {
+    q: "What are you building?",
+    options: ["Personal brand", "Startup", "Community", "Project"]
+  },
+  {
+    q: "Who should like it most?",
+    options: ["Gen Alpha", "Gen Z", "Everyone"]
+  },
+  {
+    q: "What matters more?",
+    options: ["Looks", "Clarity", "Both"]
+  },
+  {
+    q: "Pick the vibe",
+    options: ["Bold", "Minimal", "Creative"]
+  }
+];
+
+let step = 0;
+
+function renderQuestion() {
+  nextBtn.classList.add("hidden");
+  questionEl.textContent = questions[step].q;
+  choicesEl.innerHTML = "";
+
+  questions[step].options.forEach(opt => {
+    const div = document.createElement("div");
+    div.className = "choice";
+    div.textContent = opt;
+    div.onclick = () => {
+      answers[step] = opt;
+      nextBtn.classList.remove("hidden");
+    };
+    choicesEl.appendChild(div);
+  });
+}
 
 startBtns.forEach(btn => {
   btn.onclick = () => {
     flow.classList.remove("hidden");
+    renderQuestion();
     flow.scrollIntoView({ behavior: "smooth" });
   };
 });
 
-choices.forEach(choice => {
-  choice.onclick = () => {
-    if (choice.classList.contains("other")) {
-      otherInput.classList.remove("hidden");
-    } else {
-      otherInput.classList.add("hidden");
-    }
-    continueBtn.classList.remove("hidden");
-  };
-});
+nextBtn.onclick = () => {
+  step++;
+  if (step < questions.length) {
+    renderQuestion();
+  } else {
+    flow.classList.add("hidden");
+    thinking.classList.remove("hidden");
 
-continueBtn.onclick = () => {
-  flow.classList.add("hidden");
-  thinking.classList.remove("hidden");
-
-  setTimeout(() => {
-    thinking.classList.add("hidden");
-    result.classList.remove("hidden");
-    result.scrollIntoView({ behavior: "smooth" });
-  }, 2500);
+    setTimeout(() => {
+      thinking.classList.add("hidden");
+      result.classList.remove("hidden");
+      visionText.textContent =
+        `A ${answers[3]} site for ${answers[1]} that balances ${answers[2]}.`;
+      result.scrollIntoView({ behavior: "smooth" });
+    }, 2500);
+  }
 };
+
+// reveal animation
+const revealEls = document.querySelectorAll(".reveal");
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add("show");
+  });
+}, { threshold: 0.15 });
+
+revealEls.forEach(el => observer.observe(el));
