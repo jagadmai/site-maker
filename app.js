@@ -1,9 +1,10 @@
-/* ===============================
-   BUILDLY UI SOUND + ANIMATION
-   =============================== */
+/* =====================================================
+   BUILDLY — FULL UI SCRIPT (STABLE + SMOOTH)
+   ===================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
 
+  /* ---------- AUDIO ---------- */
   const clickSound = document.getElementById("clickSound");
   const whooshSound = document.getElementById("whooshSound");
 
@@ -14,20 +15,34 @@ document.addEventListener("DOMContentLoaded", () => {
     sound.play().catch(() => {});
   }
 
-  /* ---------- HOVER + CLICK ---------- */
-  document.querySelectorAll("button, .choice").forEach(el => {
+  /* ---------- AUDIO UNLOCK (CRITICAL) ---------- */
+  // Browsers block audio until first interaction
+  document.body.addEventListener(
+    "click",
+    () => {
+      if (clickSound) {
+        clickSound.play().then(() => {
+          clickSound.pause();
+          clickSound.currentTime = 0;
+        }).catch(() => {});
+      }
+    },
+    { once: true }
+  );
 
-    // Hover → click sound
-    el.addEventListener("mouseenter", () => play(clickSound));
+  /* ---------- HOVER + CLICK SOUNDS ---------- */
+  function bindSounds() {
+    document.querySelectorAll("button, .choice").forEach(el => {
+      el.addEventListener("mouseenter", () => play(clickSound));
+      el.addEventListener("click", () => play(clickSound));
+    });
 
-    // Click → click sound
-    el.addEventListener("click", () => play(clickSound));
-  });
+    document.querySelectorAll(".next, .start, .generate").forEach(el => {
+      el.addEventListener("click", () => play(whooshSound));
+    });
+  }
 
-  /* ---------- PAGE TRANSITION ---------- */
-  document.querySelectorAll(".next, .start, .generate").forEach(btn => {
-    btn.addEventListener("click", () => play(whooshSound));
-  });
+  bindSounds();
 
   /* ---------- SCROLL REVEAL ---------- */
   const observer = new IntersectionObserver(
@@ -38,11 +53,23 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
     },
-    { threshold: 0.15 }
+    {
+      threshold: 0.15
+    }
   );
 
   document.querySelectorAll(".reveal, .focus").forEach(el => {
     observer.observe(el);
+  });
+
+  /* ---------- SAFE RE-BIND (DYNAMIC CONTENT) ---------- */
+  const mutationObserver = new MutationObserver(() => {
+    bindSounds();
+  });
+
+  mutationObserver.observe(document.body, {
+    childList: true,
+    subtree: true
   });
 
 });
