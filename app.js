@@ -1,84 +1,48 @@
-const startBtns = document.querySelectorAll("#startBtn, #startBtn2");
-const flow = document.getElementById("flow");
-const questionEl = document.getElementById("question");
-const choicesEl = document.getElementById("choices");
-const nextBtn = document.getElementById("nextBtn");
-const thinking = document.getElementById("thinking");
-const result = document.getElementById("result");
-const visionText = document.getElementById("visionText");
+/* ===============================
+   BUILDLY UI SOUND + ANIMATION
+   =============================== */
 
-const answers = [];
+document.addEventListener("DOMContentLoaded", () => {
 
-const questions = [
-  {
-    q: "What are you building?",
-    options: ["Personal brand", "Startup", "Community", "Project"]
-  },
-  {
-    q: "Who should like it most?",
-    options: ["Gen Alpha", "Gen Z", "Everyone"]
-  },
-  {
-    q: "What matters more?",
-    options: ["Looks", "Clarity", "Both"]
-  },
-  {
-    q: "Pick the vibe",
-    options: ["Bold", "Minimal", "Creative"]
+  const clickSound = document.getElementById("clickSound");
+  const whooshSound = document.getElementById("whooshSound");
+
+  function play(sound) {
+    if (!sound) return;
+    sound.currentTime = 0;
+    sound.volume = 0.35;
+    sound.play().catch(() => {});
   }
-];
 
-let step = 0;
+  /* ---------- HOVER + CLICK ---------- */
+  document.querySelectorAll("button, .choice").forEach(el => {
 
-function renderQuestion() {
-  nextBtn.classList.add("hidden");
-  questionEl.textContent = questions[step].q;
-  choicesEl.innerHTML = "";
+    // Hover → click sound
+    el.addEventListener("mouseenter", () => play(clickSound));
 
-  questions[step].options.forEach(opt => {
-    const div = document.createElement("div");
-    div.className = "choice";
-    div.textContent = opt;
-    div.onclick = () => {
-      answers[step] = opt;
-      nextBtn.classList.remove("hidden");
-    };
-    choicesEl.appendChild(div);
+    // Click → click sound
+    el.addEventListener("click", () => play(clickSound));
   });
-}
 
-startBtns.forEach(btn => {
-  btn.onclick = () => {
-    flow.classList.remove("hidden");
-    renderQuestion();
-    flow.scrollIntoView({ behavior: "smooth" });
-  };
+  /* ---------- PAGE TRANSITION ---------- */
+  document.querySelectorAll(".next, .start, .generate").forEach(btn => {
+    btn.addEventListener("click", () => play(whooshSound));
+  });
+
+  /* ---------- SCROLL REVEAL ---------- */
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+
+  document.querySelectorAll(".reveal, .focus").forEach(el => {
+    observer.observe(el);
+  });
+
 });
-
-nextBtn.onclick = () => {
-  step++;
-  if (step < questions.length) {
-    renderQuestion();
-  } else {
-    flow.classList.add("hidden");
-    thinking.classList.remove("hidden");
-
-    setTimeout(() => {
-      thinking.classList.add("hidden");
-      result.classList.remove("hidden");
-      visionText.textContent =
-        `A ${answers[3]} site for ${answers[1]} that balances ${answers[2]}.`;
-      result.scrollIntoView({ behavior: "smooth" });
-    }, 2500);
-  }
-};
-
-// reveal animation
-const revealEls = document.querySelectorAll(".reveal");
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) e.target.classList.add("show");
-  });
-}, { threshold: 0.15 });
-
-revealEls.forEach(el => observer.observe(el));

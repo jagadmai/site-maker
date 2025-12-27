@@ -198,3 +198,66 @@ input {
 .hidden {
   display: none;
 }
+/* ---------- MICRO INTERACTIONS ---------- */
+
+button, .choice {
+  transition:
+    transform 0.35s cubic-bezier(.2,.8,.2,1),
+    background 0.35s ease,
+    color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+button:hover, .choice:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+button:active, .choice:active {
+  transform: scale(0.97);
+}
+
+/* Smooth text reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.9s cubic-bezier(.2,.8,.2,1);
+}
+
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Highlight glow while scrolling */
+.focus {
+  position: relative;
+  transition: color 0.6s ease;
+}
+
+.focus::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  background: radial-gradient(circle, rgba(255,0,150,0.15), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  z-index: -1;
+}
+
+.focus.show::after {
+  opacity: 1;
+}
+
+/* Bouncing dots animation */
+.dots::after {
+  content: "...";
+  animation: dots 1.5s infinite steps(4);
+}
+
+@keyframes dots {
+  0% { content: ""; }
+  33% { content: "."; }
+  66% { content: ".."; }
+  100% { content: "..."; }
+}
